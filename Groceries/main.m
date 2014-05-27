@@ -12,10 +12,19 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
+        NSString *nameString = [NSString stringWithContentsOfFile:@"/usr/share/dict/propernames"
+                                                         encoding:NSUTF8StringEncoding
+                                                            error:NULL];
+
+        NSArray *names = [nameString componentsSeparatedByString:@"\n"];
+
+        for (NSString *n in names) {
+            NSRange r = [n rangeOfString:@"AA" options:NSCaseInsensitiveSearch];
+
+            if (r.location != NSNotFound) {
+                NSLog(@"%@", n);
+            }
+        }
     }
     return 0;
 }
